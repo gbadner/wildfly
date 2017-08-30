@@ -26,9 +26,12 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
+
+import org.hibernate.jpa.AvailableSettings;
 
 @Stateless
 @LocalBean
@@ -51,5 +54,9 @@ public class MyBean {
 
     public Employee getEmployeeById(int id) {
         return onephaseEm.find(Employee.class, id, LockModeType.NONE);
+    }
+
+    public BeanManager getBeanManager() {
+        return (BeanManager) onephaseEm.getEntityManagerFactory().getProperties().get( AvailableSettings.CDI_BEAN_MANAGER );
     }
 }

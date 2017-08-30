@@ -93,4 +93,10 @@ public class EntityListenerInjectionSupportTestCase {
         Employee emp = bean.getEmployeeById(id);
         assertNotNull("Could not load added employee.", emp);
     }
+
+    @Test
+    public void testBeanManager() throws Exception {
+        MyBean cmt = lookup("MyBean", MyBean.class);
+        assertNotNull(cmt.getBeanManager());
+    }
 }
